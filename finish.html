@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>登録完了</title>
+    </head>
+    <body>
+        
+<?php
+$hostname = '127.0.0.1';
+$username = 'root';
+$password = 'dbpass';
+
+$dbname = 'report71';
+$tablename = 'rep71';
+
+$link = mysqli_connect($hostname,$username,$password);
+if(! $link){ exit("Connect error!"); }
+
+
+$result = mysqli_query($link,"USE $dbname");
+if(!$result) { exit("USE failed!"); }
+
+$day = $_POST['day'];
+$expenses = $_POST['expenses'];
+$incomes = $_POST['incomes'];
+
+$result = mysqli_query($link,"INSERT INTO rep71(day, expenses, incomes) VALUES('$day', '$expenses', '$incomes')");
+if (!$result) {
+  exit('データを登録できませんでした。');
+}
+
+
+mysqli_close($link);
+?>
+<p>登録が完了しました<p>
+        <br>
+    </body>
+</html>
